@@ -48,6 +48,13 @@ export default function () {
       alignItems: 'center',
     },
     /* Default Layouts */
+    container: {
+      flex: 1,
+      // paddingVertical: 100 / 1,
+      justifyContent: 'center',
+      paddingHorizontal: 100 / 6,
+      
+    },
     center: {
       alignItems: 'center',
       justifyContent: 'center',

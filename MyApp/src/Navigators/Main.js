@@ -1,15 +1,32 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { IndexExampleContainer, SignIn } from '@/Containers'
+import { createStackNavigator } from '@react-navigation/stack'
+import { IndexExampleContainer, SignIn, SignUp } from '@/Containers'
+import { startClock } from 'react-native-reanimated'
+import { single } from 'validate.js'
 
+const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 // @refresh reset
 const MainNavigator = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={SignIn} />
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="Home" 
+        component={SignIn}
+        options={{
+          headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          title: "SignUp"
+        }}
+      />
+    </Stack.Navigator>
   )
 }
 

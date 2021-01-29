@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { IndexStartupContainer } from '@/Containers'
+import { IndexStartupContainer, SignIn } from '@/Containers'
 import { useSelector } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { navigationRef } from '@/Navigators/Root'
@@ -47,10 +47,16 @@ const ApplicationNavigator = () => {
                 name="Main"
                 component={MainNavigator}
                 options={{
+                  title: "Example",
                   animationEnabled: false,
                 }}
               />
             )}
+            {/* <Stack.Screen 
+              name="SignIn" 
+              component={ SignIn } 
+              options={{ title: 'SignIn' }}
+            /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
