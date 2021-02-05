@@ -3,7 +3,10 @@ import { StyleSheet } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { View, Image, Text } from 'react-native'
 import { useTheme } from '@/Theme'
-import { TextInput, Button } from 'react-native-paper'
+import {  TextInput, Button } from 'react-native-paper'
+import { useForm } from "react-hook-form";
+import FormBuilder from 'react-native-paper-form-builder';
+
 
 const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
   const { Layout, Common } = useTheme()
@@ -19,13 +22,12 @@ const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
       marginVertical: 100 / 5
     },
   })
-  // const { register, handleSubmit } = useForm();
-  // const onSubmit = data => console.log(data);
 
-  const [ name, setName ] = useState('')
+  const [ firstName, setFirstName ] = useState('')
   const [ lastName, setLastName ] = useState('')
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+
 
   return (
       <KeyboardAwareScrollView
@@ -37,13 +39,14 @@ const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
         }}
         scrollEnabled={true}
       >        
-            <Image style = {styles.img} source={require('@/Assets/Images/logo.png')}/>
+          <Image style = {styles.img} source={require('@/Assets/Images/logo.png')}/>
             <TextInput 
               style={styles.emailInp}
-              label="Name"
-              value = {name}
+              label="First Name"
+              value = {firstName}
               type="string"
-              onChangeText={text => setName(text)}
+              onChangeText={text => setFirstName(text)}
+              // ref={register({ required: true, maxLength: 2 })}
             />
             <TextInput 
               style={styles.emailInp}
@@ -64,11 +67,11 @@ const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
               value = {password}  
               type="password"
               onChangeText={text => setPassword(text)}
-            />
+            /> 
             <Button
               style={styles.btn}
-              color="#004d99"
-              mode="contained"
+              color={"#004d99"}
+              mode={"contained"}
             >
               SignUp
             </Button>

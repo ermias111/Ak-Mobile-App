@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { IndexStartupContainer, SignIn } from '@/Containers'
+import { IndexStartupContainer, SignIn, CourseDetail } from '@/Containers'
 import { useSelector } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { navigationRef } from '@/Navigators/Root'
 import { SafeAreaView, StatusBar } from 'react-native'
 import { useTheme } from '@/Theme'
 import { AppearanceProvider } from 'react-native-appearance'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 
 const Stack = createStackNavigator()
+const Drawer = createDrawerNavigator()
 
 let MainNavigator
 
@@ -52,11 +55,6 @@ const ApplicationNavigator = () => {
                 }}
               />
             )}
-            {/* <Stack.Screen 
-              name="SignIn" 
-              component={ SignIn } 
-              options={{ title: 'SignIn' }}
-            /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

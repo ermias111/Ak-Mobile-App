@@ -52,7 +52,7 @@ const SignIn = ({ navigation }) => {
           style={styles.btn}
           color="#004d99"
           mode="contained"
-          
+          onPress={() => navigation.navigate('Home')}
         >
           SignIn
         </Button>

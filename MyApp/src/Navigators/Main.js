@@ -1,32 +1,65 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import { IndexExampleContainer, SignIn, SignUp } from '@/Containers'
-import { startClock } from 'react-native-reanimated'
-import { single } from 'validate.js'
+import { IndexExampleContainer, SignIn, SignUp, Home, CourseDetail, Classroom } from '@/Containers'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createStackNavigator()
-const Tab = createBottomTabNavigator()
+
+const Drawer = createDrawerNavigator();
 
 // @refresh reset
-const MainNavigator = () => {
+const MainNavigator = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen 
-        name="Home" 
+    <Drawer.Navigator edgeWidth={0}>
+      <Drawer.Screen 
+        name="SignIn" 
         component={SignIn}
         options={{
-          headerShown: false
+          headerShown: false,
+          drawerLabel: () => null,
+          title: null,
+          drawerIcon: () => null
         }}
       />
-      <Stack.Screen
+      <Drawer.Screen
         name="SignUp"
         component={SignUp}
         options={{
-          title: "SignUp"
+          headerShown: false,
+          drawerLabel: () => null,
+          title: null,
+          drawerIcon: () => null
         }}
       />
-    </Stack.Navigator>
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: true,
+        }}
+      />
+
+      <Drawer.Screen
+        name="CourseDetail"
+        component={CourseDetail}
+        options={{
+          title: 'Course Detail',
+          headerShown: true,
+        }}
+      />
+
+      <Drawer.Screen
+        name="Classroom"
+        component={Classroom}
+        options={{
+          title: 'Classroom',
+          headerShown: true,
+        }}
+      />
+    </Drawer.Navigator>
   )
 }
 
