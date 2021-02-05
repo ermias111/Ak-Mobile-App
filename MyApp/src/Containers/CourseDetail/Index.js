@@ -1,12 +1,59 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 // import { useForm } from 'react-hook-form'
-import {  ScrollView } from 'react-native'
+import {  ScrollView, View } from 'react-native'
 import { useTheme } from '@/Theme'
 import { Avatar, Button, Card, Title, Paragraph, List, Divider } from 'react-native-paper'
 
 const CourseDetail = ({ navigation }) => {
   const { Layout, Common } = useTheme()
+  const [currentCourse, setCurrentCourse] = useState({
+    title: "Biology in Amharic",
+    preparedBy: "Abebe",
+    instructorPhoto: '/images/avatars/avatar_11.png',
+    length: 0,
+    // time: 3, not in the model
+    certificate: true,
+    videos: [
+
+    ],
+    publishedDate: "2020-08-07T15:48:33.322Z",
+    icon: 'https://picsum.photos/700',
+    enrolledStudents: 1222,
+    description: "is a web-based hosting service for version control o",
+    categoryId: "",
+    rating: 0,
+    totalDownloads: 0,
+    updatedAt: "2020-08-07T15:48:33.322Z",
+    about: "",
+    requirements: '',
+    objectives: [
+      ""
+    ],
+    id: ''
+  })
+  const [courseLectures, setCourseLectures] = useState([
+    {
+      url: `https://www.youtube.com/embed/2wucLthrUjw?version=3&enablejsapi=1&rel=0&autoplay=1&showinfo=0&controls=1&modestbranding=0`,
+      title: 'create repository',
+      description: "application",
+      courseId: "5f3176854262d10017f033b9",
+      videoLength: 0,
+      materials: "",
+      part: 1,
+      id: "",
+    },
+    {
+      url: 'https://www.youtube.com/embed/2wucLthrUjw?version=3&enablejsapi=1&rel=0&autoplay=1&showinfo=0&controls=1&modestbranding=0',
+      title: 'cloning a repository',
+      description: "application",
+      courseId: "5f3176854262d10017f033b9",
+      videoLength: 0,
+      materials: "",
+      part: 2,
+      id: "",
+    }
+  ])
   const styles = StyleSheet.create({
     emailInp : {
       marginBottom: 100/7
@@ -16,23 +63,22 @@ const CourseDetail = ({ navigation }) => {
       marginTop: 100/50
     }
   })
-  // const { register, handleSubmit } = useForm();
-  // const onSubmit = data => console.log(data);
 
   return (
     <ScrollView>
         <Card>
-          <Card.Cover source={{ uri: 'https://picsum.photos/709' }} />
+          <Card.Cover source={{ uri: `${currentCourse.icon}` }} />
           <Card.Content>
-            <Title>Lorem Ipsum</Title>
+            <Title>{currentCourse.title}</Title>
             <Paragraph>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-              has been the industry's standard dummy text ever since the 1500s, when an unknown 
+              {currentCourse.description} 
             </Paragraph>
           </Card.Content>
           <Card.Actions>
             <Button
-              onPress={() => { navigation.navigate('Classroom')}}
+              onPress={() => { navigation.navigate('Classroom', {
+                courseLectures: courseLectures
+              })}}
             >Enroll</Button>
           </Card.Actions>
         </Card>
@@ -41,13 +87,16 @@ const CourseDetail = ({ navigation }) => {
             <Title>Content</Title>
             <Divider/>
             <List.Section >
-                <List.Item
-                  title="Lecture 1" 
-                />
-                <Divider/>
-                <List.Item
-                  title="Lecture 2" 
-                />
+                {
+                  courseLectures.map((lecture) => (
+                    <View>
+                      <List.Item
+                        title={lecture.title} 
+                      />
+                      <Divider/>
+                    </View>
+                  ))
+                }
             </List.Section>
           </Card.Content>
         </Card>
@@ -76,7 +125,7 @@ const CourseDetail = ({ navigation }) => {
                 }} source={require("@/Assets/Images/TOM.png" )}/>}
                 descriptionNumberOfLines= {4}
               />
-          </List.Section>
+            </List.Section>
           </Card.Content>
         </Card>
     </ScrollView>

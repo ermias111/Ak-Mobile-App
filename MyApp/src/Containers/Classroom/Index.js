@@ -12,11 +12,41 @@ import { WebView } from 'react-native-webview';
 import { NavigationEvents } from "react-navigation";
 import { ListItem } from 'native-base';
 
-const Classroom = ({ navigation }) => {
+const Classroom = ({ navigation, route }) => {
   const { Layout, Common } = useTheme()
+  const { courseLectures } = route.params;
   const [isThePageActive, setIsThePageActive] = useState(true);
   const [comment, setComment] = useState('');
-  // const isFocused = navigation.isFocused();
+  const [comments, setComments] = useState([
+    {
+      text: "Awesome Lecture",
+      userName: "Ermias",
+      avatar: "@/Assets/Images/TOM.png",
+      likes: 12,
+      dislikes: 1,
+      replies: [
+          "string"
+      ],
+      id: "5f325263c1e3d500174c2e2d",
+      commentId: "",
+      videoId: "5f3178044262d10017f033ba",
+      courseId: "5f3176854262d10017f033b9"
+    }, 
+    {
+      text: "Awesome Lecture",
+      userName: "Ermias",
+      avatar: "@/Assets/Images/TOM.png",
+      likes: 12,
+      dislikes: 1,
+      replies: [
+          "string"
+      ],
+      id: "5f325263c1e3d500174c2e2e",
+      commentId: "",
+      videoId: "5f3178044262d10017f033ba",
+      courseId: "5f3176854262d10017f033b9"
+    }
+  ])
   const styles = StyleSheet.create({
     
   })
@@ -38,7 +68,7 @@ const Classroom = ({ navigation }) => {
               <WebView
                 javaScriptEnabled={true}
                 domStorageEnabled={true}
-                source={{ uri: `https://www.youtube.com/embed/2wucLthrUjw?version=3&enablejsapi=1&rel=0&autoplay=1&showinfo=0&controls=1&modestbranding=0` }}
+                source={{ uri: `${courseLectures[0].url}` }}
                 style={{ height: 250 }}
               />
             }
@@ -65,13 +95,16 @@ const Classroom = ({ navigation }) => {
       <Divider/> 
       <Card>
       <List.Section title="Course Content">
-            <List.Item 
-              title="Lecture 1"
-            />
-            <Divider/>
-            <List.Item 
-              title="Lecture 2"
-            />
+            {
+              courseLectures.map((lecture) => (
+                <View>
+                  <List.Item
+                    title={lecture.title} 
+                  />
+                  <Divider/>
+                </View>
+              ))
+            }
           </List.Section>
       </Card>
       <Divider/>
@@ -92,28 +125,22 @@ const Classroom = ({ navigation }) => {
         </Card.Content>
       </Card> 
       <List.Section title='Comments'>
+        {
+          comments.map((comment, i) => (
+            <View key={i}>
+              <List.Item
+                title={comment.userName} 
+                description={comment.text}
+                left={props => <Avatar.Image size={40} style={{
+                  marginTop: 100/15
+                }} source={require('@/Assets/Images/TOM.png')}/>}
+                descriptionNumberOfLines= {4}
+              />
+              <Divider/>
+            </View>
+          ))
+        }
        
-          <List.Item
-            title="First item" 
-            description="industry. Lorem Ipsum has been the indu
-              stry's standard dummy text ever since th
-              e 1500s, when an unknown printer took"
-            left={props => <Avatar.Image size={40} style={{
-              marginTop: 100/15
-            }} source={require("@/Assets/Images/TOM.png" )}/>}
-            descriptionNumberOfLines= {4}
-          />
-          <Divider/>
-          <List.Item
-            title="First item" 
-            description="industry. Lorem Ipsum has been the indu
-              stry's standard dummy text ever since th
-              e 1500s, when an unknown printer took"
-            left={props => <Avatar.Image size={40} style={{
-              marginTop: 100/15
-            }} source={require("@/Assets/Images/TOM.png" )}/>}
-            descriptionNumberOfLines= {4}
-          />
       </List.Section>
     </ScrollView>
   ) 
