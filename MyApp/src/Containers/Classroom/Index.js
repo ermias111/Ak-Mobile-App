@@ -99,10 +99,11 @@ const Classroom = ({ navigation, route }) => {
       <Card>
       <List.Section title="Course Content">
             {
-              courseLectures.map((lecture) => (
+              courseLectures.map((lecture, i) => (
                 <View>
                   <List.Item
-                    title={lecture.title} 
+                    title={lecture.title}
+                    key={i} 
                   />
                   <Divider/>
                 </View>

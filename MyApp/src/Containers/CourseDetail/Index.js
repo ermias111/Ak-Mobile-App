@@ -65,8 +65,25 @@ const CourseDetail = ({ navigation, route }) => {
         </Card>
         <Card style={styles.card}>
           <Card.Content>
-            <Title>Content</Title>
-            <Divider/>
+            <Title>Course Objectives</Title>
+            <List.Section >
+                {
+                  currentCourse.objectives.map((objective, i) => (
+                    <View>
+                      <List.Item
+                        title={objective}
+                        key={i} 
+                      />
+                      <Divider/>
+                    </View>
+                  ))
+                }
+            </List.Section>
+          </Card.Content>
+        </Card>
+        <Card style={styles.card}>
+          <Card.Content>
+            <Title>Course Content</Title>
             <List.Section >
                 {
                   courseLectures.map((lecture, i) => (
