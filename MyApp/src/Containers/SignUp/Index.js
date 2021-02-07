@@ -141,6 +141,9 @@ const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
                   mode={"contained"}
                   onPress={handleSubmit} 
                   title="Submit"
+                  disabled={
+                    errors.email || errors.password || errors.firstName || errors.lastName ? true : false
+                  }
                 >
                   SignUp
                 </Button>
