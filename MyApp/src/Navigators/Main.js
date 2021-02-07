@@ -5,6 +5,7 @@ import { IndexExampleContainer, SignIn, SignUp, Home, CourseDetail, Classroom } 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
+import { DrawerContent } from './DrawerContent'
 
 const Stack = createStackNavigator()
 
@@ -13,7 +14,10 @@ const Drawer = createDrawerNavigator();
 // @refresh reset
 const MainNavigator = ({navigation}) => {
   return (
-    <Drawer.Navigator edgeWidth={0}>
+    <Drawer.Navigator 
+      edgeWidth={0} 
+      drawerContent={props => <DrawerContent {...props} />}
+      >
       <Drawer.Screen 
         name="SignIn" 
         component={SignIn}
