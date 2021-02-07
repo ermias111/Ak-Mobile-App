@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { Alert, StyleSheet } from 'react-native'
 // import { useForm } from 'react-hook-form'
 import { View, Image, Text } from 'react-native'
 import { useTheme } from '@/Theme'
+import { Formik } from 'formik';
 import { TextInput, Button, Form } from 'react-native-paper'
 
 const SignIn = ({ navigation }) => {
@@ -28,34 +29,47 @@ const SignIn = ({ navigation }) => {
   // const { register, handleSubmit } = useForm();
   // const onSubmit = data => console.log(data);
 
-  const [ email, setEmail ] = useState('')
-  const [ password, setPassword ] = useState('')
-
   return (
     <View style={[Layout.container] }>
         <Image style = {styles.img} source={require('@/Assets/Images/logo.png')}/>
-        <TextInput 
-          style={styles.emailInp}
-          placeholderTextColor= "#000000"
-          label="Email"
-          value = {email}
-          type="email"
-          onChangeText={text => setEmail(text)}
-        />
-        <TextInput 
-          label="Password"
-          value = {password}  
-          type="password"
-          onChangeText={text => setPassword(text)}
-        />
-        <Button
-          style={styles.btn}
-          color="#004d99"
-          mode="contained"
-          onPress={() => navigation.navigate('Home')}
-        >
-          SignIn
-        </Button>
+        <Formik 
+            initialValues={{ 
+              email: '',
+              password: '',
+            }}
+            onSubmit={values => {
+              // Alert.alert(values.email + values.password)
+              navigation.navigate('Home')
+            }}
+          >
+            {({handleChange, handleBlur, handleSubmit, values}) => (
+              <View>
+                <TextInput 
+                  style={styles.emailInp}
+                  placeholderTextColor= "#000000"
+                  label="Email"
+                  value = {values.email}
+                  type="email"
+                  onChangeText={handleChange('email')}
+                />
+                <TextInput 
+                  label="Password"
+                  value = {values.password}  
+                  type="password"
+                  onChangeText={handleChange('password')}
+                />
+                <Button
+                  style={styles.btn}
+                  color="#004d99"
+                  mode="contained"
+                  // onPress={() => navigation.navigate('Home')}
+                  onPress={handleSubmit}
+                >
+                  SignIn
+                </Button>
+              </View>
+            )}
+          </Formik>
         <Text 
           style={styles.txt}
           onPress={() => navigation.navigate('SignUp')}
