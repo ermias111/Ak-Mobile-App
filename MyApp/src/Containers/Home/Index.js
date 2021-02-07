@@ -14,7 +14,7 @@ const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 const Home = ({ navigation }) => {
   const { Layout, Common } = useTheme()
-  const [courseLectures, setCourseLectures] = useState([
+  const [courses, setCourses] = useState([
     {
       title: "Biology in Amharic",
       preparedBy: "Abebe",
@@ -51,7 +51,32 @@ const Home = ({ navigation }) => {
 
       ],
       publishedDate: "2020-08-07T15:48:33.322Z",
-      icon: 'https://picsum.photos/700',
+      icon: 'https://picsum.photos/706',
+      enrolledStudents: 0,
+      description: "is a web-based hosting service for version control o",
+      categoryId: "",
+      rating: 0,
+      totalDownloads: 0,
+      updatedAt: "2020-08-07T15:48:33.322Z",
+      about: "",
+      requirements: "",
+      objectives: [
+        ""
+      ],
+      id: "5f3176854262d10017f033b9"
+    },
+    {
+      title: 'English for Beginners',
+      preparedBy: "Fekede",
+      instructorPhoto: '/images/avatars/avatar_11.png',
+      length: 0,
+      // time: 3, not in the model
+      certificate: true,
+      videos: [
+
+      ],
+      publishedDate: "2020-08-07T15:48:33.322Z",
+      icon: 'https://picsum.photos/677',
       enrolledStudents: 0,
       description: "is a web-based hosting service for version control o",
       categoryId: "",
@@ -75,9 +100,11 @@ const Home = ({ navigation }) => {
   return (
     <ScrollView>
       {
-        courseLectures.map((course, i) => (
+        courses.map((course, i) => (
           <Card
-            onPress={() => {navigation.navigate('CourseDetail')}}
+            onPress={() => {navigation.navigate('CourseDetail', {
+              course: course
+            })}}
             key={i}
           >
             <Card.Cover source={{ uri: `${course.icon}` }} />
@@ -87,8 +114,6 @@ const Home = ({ navigation }) => {
               <Paragraph>{course.description}</Paragraph>
             </Card.Content>
             <Card.Actions>
-              {/* <Button>Cancel</Button>
-              <Button>Ok</Button> */}
             </Card.Actions>
           </Card>
         ))

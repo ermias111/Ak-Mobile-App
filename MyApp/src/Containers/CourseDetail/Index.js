@@ -5,33 +5,10 @@ import {  ScrollView, View } from 'react-native'
 import { useTheme } from '@/Theme'
 import { Avatar, Button, Card, Title, Paragraph, List, Divider } from 'react-native-paper'
 
-const CourseDetail = ({ navigation }) => {
+const CourseDetail = ({ navigation, route }) => {
   const { Layout, Common } = useTheme()
-  const [currentCourse, setCurrentCourse] = useState({
-    title: "Biology in Amharic",
-    preparedBy: "Abebe",
-    instructorPhoto: '/images/avatars/avatar_11.png',
-    length: 0,
-    // time: 3, not in the model
-    certificate: true,
-    videos: [
-
-    ],
-    publishedDate: "2020-08-07T15:48:33.322Z",
-    icon: 'https://picsum.photos/700',
-    enrolledStudents: 1222,
-    description: "is a web-based hosting service for version control o",
-    categoryId: "",
-    rating: 0,
-    totalDownloads: 0,
-    updatedAt: "2020-08-07T15:48:33.322Z",
-    about: "",
-    requirements: '',
-    objectives: [
-      ""
-    ],
-    id: ''
-  })
+  const { course } = route.params;
+  const [currentCourse, setCurrentCourse] = useState(course)
   const [courseLectures, setCourseLectures] = useState([
     {
       url: `https://www.youtube.com/embed/2wucLthrUjw?version=3&enablejsapi=1&rel=0&autoplay=1&showinfo=0&controls=1&modestbranding=0`,
@@ -64,6 +41,10 @@ const CourseDetail = ({ navigation }) => {
     }
   })
 
+  useEffect(() => (
+    setCurrentCourse(course)
+  ))
+
   return (
     <ScrollView>
         <Card>
@@ -88,10 +69,11 @@ const CourseDetail = ({ navigation }) => {
             <Divider/>
             <List.Section >
                 {
-                  courseLectures.map((lecture) => (
+                  courseLectures.map((lecture, i) => (
                     <View>
                       <List.Item
-                        title={lecture.title} 
+                        title={lecture.title}
+                        key={i} 
                       />
                       <Divider/>
                     </View>
