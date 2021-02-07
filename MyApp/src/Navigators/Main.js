@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import { IndexExampleContainer, SignIn, SignUp, Home, CourseDetail, Classroom } from '@/Containers'
+import { Account, SignIn, SignUp, Home, CourseDetail, Classroom } from '@/Containers'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
@@ -60,6 +60,15 @@ const MainNavigator = ({navigation}) => {
         component={Classroom}
         options={{
           title: 'Classroom',
+          headerShown: true,
+        }}
+      />
+
+      <Drawer.Screen
+        name="Account"
+        component={Account}
+        options={{
+          title: 'Account',
           headerShown: true,
         }}
       />

@@ -25,7 +25,7 @@ import {
 //     );
 // }
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // // import{ AuthContext } from '../components/context';
 
@@ -99,19 +99,8 @@ export function DrawerContent(props) {
                             //     size={size}
                             //     />
                             // )}
-                            label="Settings"
-                            // onPress={() => {props.navigation.navigate('SettingsScreen')}}
-                        />
-                        <DrawerItem 
-                            // icon={({color, size}) => (
-                            //     <Icon 
-                            //     name="account-check-outline" 
-                            //     color={color}
-                            //     size={size}
-                            //     />
-                            // )}
-                            label="Support"
-                            // onPress={() => {props.navigation.navigate('SupportScreen')}}
+                            label="Account"
+                            onPress={() => {props.navigation.navigate('Account')}}
                         />
                     </Drawer.Section>
                     {/* <Drawer.Section title="Preferences">

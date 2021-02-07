@@ -100,7 +100,7 @@ const Classroom = ({ navigation, route }) => {
       <List.Section title="Course Content">
             {
               courseLectures.map((lecture, i) => (
-                <View>
+                <View  key={i}>
                   <List.Item
                     title={lecture.title}
                     key={i} 
@@ -133,6 +133,7 @@ const Classroom = ({ navigation, route }) => {
           comments.map((comment, i) => (
             <View key={i}>
               <List.Item
+                key={i}
                 title={comment.userName} 
                 description={comment.text}
                 left={props => <Avatar.Image size={40} style={{

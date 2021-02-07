@@ -69,7 +69,7 @@ const CourseDetail = ({ navigation, route }) => {
             <List.Section >
                 {
                   currentCourse.objectives.map((objective, i) => (
-                    <View>
+                    <View key={i}>
                       <List.Item
                         title={objective}
                         key={i} 
@@ -87,7 +87,7 @@ const CourseDetail = ({ navigation, route }) => {
             <List.Section >
                 {
                   courseLectures.map((lecture, i) => (
-                    <View>
+                    <View key={i}>
                       <List.Item
                         title={lecture.title}
                         key={i} 
