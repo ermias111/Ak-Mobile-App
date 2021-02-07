@@ -3,10 +3,26 @@ import { Alert, StyleSheet } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { View, Image, Text } from 'react-native'
 import { useTheme } from '@/Theme'
-import {  TextInput, Button } from 'react-native-paper'
+import {  TextInput, Button, HelperText } from 'react-native-paper'
 import { useForm } from "react-hook-form";
 import { Formik } from 'formik';
 import FormBuilder from 'react-native-paper-form-builder';
+import * as Yup from 'yup';
+
+const SignupSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  lastName: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().email('Invalid email address').required('Required'),
+  password: Yup.string()
+    .min(8, 'Password too short(must be at least 8 characters)')
+    .required('Required')
+});
 
 
 const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
@@ -14,6 +30,9 @@ const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
   const styles = StyleSheet.create({
     emailInp : {
       marginBottom: 100/7
+    },
+    inpErr : {
+      marginBottom: 0
     },
     btn : {
       marginTop: 100/20
@@ -43,37 +62,79 @@ const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
               email: '',
               password: ''
             }}
+            validationSchema={SignupSchema}
             onSubmit={values => Alert.alert(values.firstName + values.lastName)}
           >
-            {({handleChange, handleBlur, handleSubmit, values}) => (
+            {({handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
               <View>
                 <TextInput 
-                  style={styles.emailInp}
+                  style={errors.firstName && touched.firstName ? styles.inpErr : styles.emailInp}
                   label="First Name"
                   value = {values.firstName}
                   // onChangeText={text => setFirstName(text)}
                   onChangeText={handleChange('firstName')}
                 />
+                {
+                  errors.firstName && touched.firstName ? (
+                    <HelperText 
+                      type="error"
+                      style={styles.emailInp}
+                    >
+                      {errors.firstName}
+                    </HelperText>
+                  ) : null
+                }
                 <TextInput 
-                  style={styles.emailInp}
+                  style={errors.lastName && touched.lastName ? styles.inpErr : styles.emailInp}
                   label="Last name"
                   value = {values.lastName}
                   type="string"
                   onChangeText={handleChange('lastName')}
                 />
+                {
+                  errors.lastName && touched.lastName ? (
+                    <HelperText 
+                      type="error"
+                      style={styles.emailInp}
+                    >
+                      {errors.lastName}
+                    </HelperText>
+                  ) : null
+                }
                 <TextInput 
-                  style={styles.emailInp}
+                  style={errors.email && touched.email ? styles.inpErr : styles.emailInp}
                   label="Email"
                   value = {values.email}
                   type="email"
                   onChangeText={handleChange('email')}
                 />
+                {
+                  errors.email && touched.email ? (
+                    <HelperText 
+                      type="error"
+                      style={styles.emailInp}
+                    >
+                      {errors.email}
+                    </HelperText>
+                  ) : null
+                }
                 <TextInput 
                   placeholder="Password"
+                  style={errors.password && touched.password ? styles.inpErr : styles.emailInp}
                   value = {values.password}  
-                  type="password"
+                  secureTextEntry={true}
                   onChangeText={handleChange('password')}
                 /> 
+                {
+                  errors.password && touched.password ? (
+                    <HelperText 
+                      type="error"
+                      style={styles.emailInp}
+                    >
+                      {errors.password}
+                    </HelperText>
+                  ) : null
+                }
                 <Button
                   style={styles.btn}
                   color={"#004d99"}
