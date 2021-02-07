@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, StyleSheet } from 'react-native'
 // import { useForm } from 'react-hook-form'
-import { View, Image, ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useTheme } from '@/Theme'
 import { Avatar, Button, Card, TextInput, List, Divider } from 'react-native-paper'
@@ -79,6 +79,9 @@ const Classroom = ({ navigation, route }) => {
           <Button
             mode="text"
             color="#004d99"
+            onPress={() => {
+              Alert.alert('')
+            }}
           >
             Prev
           </Button>
