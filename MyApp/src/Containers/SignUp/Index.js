@@ -25,7 +25,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 
-const SignUp = ({ height = 200, width = 200, mode = 'contain' }) => {
+const SignUp = ({ navigation }) => {
   const { Layout, Common } = useTheme()
   const styles = StyleSheet.create({
     emailInp : {
